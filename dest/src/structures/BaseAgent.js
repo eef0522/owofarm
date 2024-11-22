@@ -63,6 +63,12 @@ export class BaseAgent extends Client {
         });
     };
     send = async (message, { withPrefix = true, channel = this.activeChannel, delay = ranInt(120, 3700), } = {}) => {
+        if (!this.send) {
+            throw new TypeError('send method is not defined');
+        }
+        if (!channel) {
+            throw new TypeError('channel is not defined');
+        }
         if (this.captchaDetected)
             return;
         if (delay)
@@ -164,76 +170,80 @@ export class BaseAgent extends Client {
         });
     };
     main = async () => {
-        if (this.captchaDetected || Date.now() - this.lastTime < 15_000)
-            return;
-        const command = this.owoCommands[ranInt(0, this.owoCommands.length)];
-        if (!command) {
-            logger.debug("No command found");
-            await this.sleep(ranInt(1000, 1000));
-            this.main();
-            return;
-        }
-        await this.send(command);
-        this.lastTime = Date.now();
-        if (command == "hunt" && this.config.autoGem) {
-            const filter = (msg) => msg.author.id == this.owoID &&
-                msg.content.includes(msg.guild?.members.me?.displayName) &&
-                /hunt is empowered by| spent 5 .+ and caught a/.test(msg.content);
-            this.activeChannel
-                .createMessageCollector({ filter, max: 1, time: 15_000 })
-                .once("collect", async (msg) => {
-                let param1 = !msg.content.includes("gem1") && (!this.gem1 || this.gem1.length > 0);
-                let param2 = !msg.content.includes("gem3") && (!this.gem2 || this.gem2.length > 0);
-                let param3 = !msg.content.includes("gem4") && (!this.gem3 || this.gem3.length > 0);
-                if (param1 || param2 || param3)
-                    await this.aGem(param1, param2, param3);
-            });
-        }
-        const commands = [
-            {
-                condition: () => this.config.autoPray &&
-                    Date.now() - this.toutPray >= 360_000,
-                action: this.aPray,
-            },
-            {
-                condition: () => this.config.autoDaily,
-                action: this.aDaily
-            },
-            {
-                condition: () => this.config.autoOther.length > 0 &&
-                    Date.now() - this.toutOther >= 60_000,
-                action: this.aOther,
-            },
-            {
-                condition: () => this.config.autoSleep &&
-                    this.totalCommands >= this.coutSleep,
-                action: this.aSleep,
-            },
-            {
-                condition: () => this.config.channelID.length > 1 &&
-                    this.totalCommands >= this.coutChannel,
-                action: this.cChannel,
-            },
-            {
-                condition: () => this.config.autoReload &&
-                    Date.now() > this.reloadTime,
-                action: () => this.aReload(),
-            },
-            {
-                condition: () => this.config.autoQuote.length > 0,
-                action: this.aQuote,
-            },
-        ];
-        for (const command of commands) {
-            if (this.captchaDetected)
+        try {
+            if (this.captchaDetected || Date.now() - this.lastTime < 15_000)
                 return;
-            if (command.condition())
-                await command.action();
-            const delay = ranInt(15000, 22000) / commands.length;
-            await this.sleep(ranInt(delay, delay + 1200));
+            const command = this.owoCommands[ranInt(0, this.owoCommands.length)];
+            if (!command) {
+                logger.debug("No command found");
+                await this.sleep(ranInt(1000, 1000));
+                this.main();
+                return;
+            }
+            await this.send(command);
+            this.lastTime = Date.now();
+            if (command == "hunt" && this.config.autoGem) {
+                const filter = (msg) => msg.author.id == this.owoID &&
+                    msg.content.includes(msg.guild?.members.me?.displayName) &&
+                    /hunt is empowered by| spent 5 .+ and caught a/.test(msg.content);
+                this.activeChannel
+                    .createMessageCollector({ filter, max: 1, time: 15_000 })
+                    .once("collect", async (msg) => {
+                    let param1 = !msg.content.includes("gem1") && (!this.gem1 || this.gem1.length > 0);
+                    let param2 = !msg.content.includes("gem3") && (!this.gem2 || this.gem2.length > 0);
+                    let param3 = !msg.content.includes("gem4") && (!this.gem3 || this.gem3.length > 0);
+                    if (param1 || param2 || param3)
+                        await this.aGem(param1, param2, param3);
+                });
+            }
+            const commands = [
+                {
+                    condition: () => this.config.autoPray &&
+                        Date.now() - this.toutPray >= 360_000,
+                    action: this.aPray,
+                },
+                {
+                    condition: () => this.config.autoDaily,
+                    action: this.aDaily
+                },
+                {
+                    condition: () => this.config.autoOther.length > 0 &&
+                        Date.now() - this.toutOther >= 60_000,
+                    action: this.aOther,
+                },
+                {
+                    condition: () => this.config.autoSleep &&
+                        this.totalCommands >= this.coutSleep,
+                    action: this.aSleep,
+                },
+                {
+                    condition: () => this.config.channelID.length > 1 &&
+                        this.totalCommands >= this.coutChannel,
+                    action: this.cChannel,
+                },
+                {
+                    condition: () => this.config.autoReload &&
+                        Date.now() > this.reloadTime,
+                    action: () => this.aReload(),
+                },
+                {
+                    condition: () => this.config.autoQuote.length > 0,
+                    action: this.aQuote,
+                },
+            ];
+            for (const command of commands) {
+                if (this.captchaDetected)
+                    return;
+                if (command.condition())
+                    await command.action();
+                const delay = ranInt(15000, 22000) / commands.length;
+                await this.sleep(ranInt(delay, delay + 1200));
+            }
+            await this.sleep(ranInt(2000, 5000));
+            this.main();
+        } catch (error) {
+            console.error(error);
         }
-        await this.sleep(ranInt(2000, 5000));
-        this.main();
     };
     run = (config) => {
         this.config = config;

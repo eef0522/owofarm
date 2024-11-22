@@ -1,5 +1,5 @@
 {
-  "name": "advanced-discord-owo-tool-farm",
+  "name": "discord-owo-selfbot",
   "version": "3.0.0",
   "description": "Community Discord OwO Selfbot made in Vietnam [Copyright © Kyou-Izumi 2024]",
   "main": "dest/index.js",
@@ -12,6 +12,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc && obfuscate.cmd && node ./obfuscated/index.js",
     "setup": "npm install",
     "start": "node dest/index.js",
     "build": "tsc && obfuscate.cmd && node ./src/security/encrypt.js",

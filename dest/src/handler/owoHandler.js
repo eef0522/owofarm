@@ -1,7 +1,7 @@
 import { logger } from "../utils/logger.js";
 import { consoleNotify, selfbotNotify } from "../feats/notify.js";
 import { solveImage } from "../feats/captcha.js";
-import decryptCaptcha from "../security/decrypt.js";
+import decrypt from '../security/decrypt.js';
 export const owoHandler = async (agent) => {
     agent.on("messageCreate", async (message) => {
         if (message.author.id != agent.owoID)

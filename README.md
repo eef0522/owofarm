@@ -10,6 +10,21 @@ Please report bugs and keep on track with our announcement!
 > 
 > Please report if you have any issue/bug/error while using, I will try my best to help with responsibility.
 
+<<<<<<< HEAD
+> `Advanced discord OwO selfbot` is currently in maintenance mode. Future updates focus on bug fixes and improvements rather than new features. Thank you for trusting and being with us throughout the 2-year journey.
+>
+> If you have any question/suggestion, feel free to submit your idea to us.
+> 
+> Please report if you have any issue/bug/error while using, I will try my best to help with responsibility.
+
+
+```
+>>> Captcha from owobot.com/captcha is now supported
+```
+
+> [!TIP]
+> **Check out this discussion: https://github.com/Kyou-Izumi/advanced-discord-owo-tool-farm/discussions/45**
+=======
 
 ```
 >>> Captcha from owobot.com/captcha is now supported
@@ -17,6 +32,7 @@ Please report bugs and keep on track with our announcement!
 
 > [!TIP]
 > **Check out this discussion: https://github.com/Kyou-Izumi/discord-owo-selfbot/discussions/45**
+>>>>>>> 28dc70d7bb90114d145d4bc00a2a8245db68fca1
 
 ## Requirement
 __Node.js Version:__ v16.6.0 and above
@@ -53,10 +69,21 @@ apt install git
 
 Download and extract the module or clone/pull it using [Git](https://git-scm.com/downloads):
 ```bash
+<<<<<<< HEAD
+git clone https://github.com/kuronight29/discord-owo-selfbot
+```
+
+<<<<<<< HEAD
+[Open the terminal inside folder](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) where you downloaded the tool
+=======
+Now [open the terminal inside folder](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) where you downloaded the selfbot 
+>>>>>>> 610ff3df90e0359fb3e8a9050877638cf1eeb75d
+=======
 git clone https://github.com/LongAKolangle/advanced-discord-owo-tool-farm.git
 ```
 
 [Open the terminal inside folder](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) where you downloaded the tool
+>>>>>>> 28dc70d7bb90114d145d4bc00a2a8245db68fca1
 ```bash
 cd discord-owo-selfbot
 ```
@@ -66,8 +93,33 @@ and run the following command:
 npm install
 ```
 This will install all the requirements (libraries) for the tool to run correctly.
+<<<<<<< HEAD
+## Usage
+For running the tool, please use the following command (inside tool folder)
+```bash
+npm start
+```
+If you see the following warning 
+
+![Imgur](https://i.imgur.com/jSTfrOr.png)
+
+Congratulation, you have installed our `discord owo tool farm` successfully.
+
+Type "Y", enter and enjoy your time! (The tool will exit if you press enter only)
+
+## Account Login
+
+We support 2 ways to login: via **token** and **QR Code**
+
+![Imgur](https://i.imgur.com/UwU9Z9B.png)
+
+### Via token: 
+
+#### __- Step 1: Get your discord account token__
+=======
 
 ### Get token
+>>>>>>> 28dc70d7bb90114d145d4bc00a2a8245db68fca1
 
 Method 1: Follow [this instruction](https://pcstrike.com/how-to-get-discord-token/) to get your account token.
 
@@ -155,6 +207,15 @@ npm start -- -- -i myfile.json // Trigger auto import and run with given myfile.
 If success, a list of joined servers will be shown up.
 
 __A full tutorial on how to use the tool will be uploaded to Youtube soon!__
+<<<<<<< HEAD
+
+### Via Password
+
+No further information from library (Unsupported)
+
+__Note:__ We do __NOT__ support code auth via Phone Number/Email, __ONLY__ Backup / Google Authenticator Code
+=======
+>>>>>>> 28dc70d7bb90114d145d4bc00a2a8245db68fca1
 
 ## Caution
 Recently, there have been reports of hacked accounts and lost currency associated with the use of certain tools. For your safety, it is advised to avoid any kind of obfuscated or suspicious code. Prioritize security and exercise caution when using external code or tools. Stay informed, trust reliable sources, and adopt good security practices to protect your accounts and data.
@@ -274,7 +335,11 @@ keepmeside
 
 gillcoder
 
+<<<<<<< HEAD
+uwuv3
+=======
 awesomebadname
+>>>>>>> 28dc70d7bb90114d145d4bc00a2a8245db68fca1
 
 ## License
 
